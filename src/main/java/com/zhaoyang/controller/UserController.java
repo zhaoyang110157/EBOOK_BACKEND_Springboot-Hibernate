@@ -19,5 +19,13 @@ public class UserController {
     @Autowired
     private UserService userservice;
 
+    @RequestMapping(value = "/login",method = RequestMethod.POST)
+    @ResponseBody
+    public String login(@RequestBody LoginState loginState,HttpSession session){
+        String account = loginState.getAccount();
+        String password = loginState.getPassword();
+        return "";
+    }
+
 
 }

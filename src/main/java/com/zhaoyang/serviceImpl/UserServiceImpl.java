@@ -1,9 +1,10 @@
-package com.zhaoyang.service;
+package com.zhaoyang.serviceImpl;
 
 import com.zhaoyang.entity.User;
 import com.zhaoyang.entity.UserState;
 import com.zhaoyang.entity.LoginState;
 import com.zhaoyang.mapper.UserMapper;
+import com.zhaoyang.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -11,7 +12,7 @@ import java.util.List;
 
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
@@ -40,29 +41,6 @@ public class UserServiceImpl implements UserService{
         LoginState state = new LoginState();
         User user;
 
-        user = userMapper.getLoginState(account, password);
-
-        if (user == null){
-            state.setIsLogin(false);
-            state.setMessage("用户名密码错误");
-        } else {
-            if (user.getAllowed() == 1) {
-                if (user.getRole() == "manager" ) {
-                    state.setIsLogin(true);
-                    state.setId(user.getId());
-                    state.setAccount(user.getAccount());
-                    state.setMessage("用户存在，为管理员");
-                } else {
-                    state.setIsLogin(true);
-                    state.setId(user.getId());
-                    state.setAccount(user.getAccount());
-                    state.setMessage("用户存在，为普通用户");
-                }
-            } else {
-                state.setIsLogin(false);
-                state.setMessage("用户被禁用");
-            }
-        }
         return state;
     }
 
