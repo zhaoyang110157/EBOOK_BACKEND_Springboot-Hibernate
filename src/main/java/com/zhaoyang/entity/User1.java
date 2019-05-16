@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "users", schema = "test", catalog = "")
 @JsonIgnoreProperties(value = {"handler","hibernateLazyInitializer","fieldHandler"})
-public class User {
+public class User1 {
     private int id;
     private String firstname;
     private String lastname;
@@ -74,12 +74,12 @@ public class User {
 
         User that = (User) o;
 
-        if (id != that.id) return false;
+       /* if (id != that.id) return false;
         if (firstname != null ? !firstname.equals(that.firstname) : that.firstname != null) return false;
         if (lastname != null ? !lastname.equals(that.lastname) : that.lastname != null) return false;
         if (phone != null ? !phone.equals(that.phone) : that.phone != null) return false;
         if (email != null ? !email.equals(that.email) : that.email != null) return false;
-
+*/
         return true;
     }
 
