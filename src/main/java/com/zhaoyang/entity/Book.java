@@ -1,6 +1,5 @@
 package com.zhaoyang.entity;
 
-import com.sun.org.apache.xerces.internal.dom.DOMOutputImpl;
 
 import javax.persistence.*;
 

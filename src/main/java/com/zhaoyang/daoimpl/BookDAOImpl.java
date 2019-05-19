@@ -20,34 +20,18 @@ public class BookDAOImpl implements BookDAO {
     }
 
     @Override
-    public void modifyBook(Book newBook, Book oldBook){
-        bookRepository.delete(oldBook);
-        if(newBook.getTitle().equals("")){
-            newBook.setTitle(oldBook.getTitle());
-        }
-        if(newBook.getBid() == 0)
-        {
-            newBook.setBid(oldBook.getBid());
-        }
-        if(newBook.getImage().equals("")) {
-            newBook.setImage(oldBook.getImage());
-        }
-        if(newBook.getISBN().equals("")){
-            newBook.setISBN(oldBook.getISBN());
-        }
-        if(newBook.getWriter().equals("")){
-            newBook.setWriter(oldBook.getWriter());
-        }
-        if(newBook.getInventory()==0){
-            newBook.setInventory(oldBook.getInventory());
-        }
-        if(newBook.getTranch().equals("")){
-            newBook.setTranch(oldBook.getTranch());
-        }
-        if(newBook.getIntroduction().equals("")){
-            newBook.setIntroduction(oldBook.getIntroduction());
-        }
-        bookRepository.save(newBook);
+    public void modifyBook(Book newBook, int bid){
+        Book oldBook = bookRepository.findBookByBid(bid);
+        oldBook.setTitle(newBook.getTitle());
+        oldBook.setBid(newBook.getBid());
+        oldBook.setImage(newBook.getImage());
+        oldBook.setISBN(newBook.getISBN());
+        oldBook.setWriter(newBook.getWriter());
+        oldBook.setInventory(newBook.getInventory());
+        oldBook.setTranch(newBook.getTranch());
+        oldBook.setIntroduction(newBook.getIntroduction());
+        bookRepository.saveAndFlush(oldBook);
+        System.out.print( "modify succeed \n");
     }
 
     @Override

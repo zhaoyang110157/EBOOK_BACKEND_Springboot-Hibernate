@@ -20,8 +20,8 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void modifyBook(Book newBook, Book oldBook){
-        bookDAO.modifyBook(newBook, oldBook);
+    public void modifyBook(Book newBook,int bid){
+        bookDAO.modifyBook(newBook, bid);
     }
 
     @Override
@@ -38,5 +38,4 @@ public class BookServiceImpl implements BookService {
     public void deleteBook(int bid){
         bookDAO.deleteBook(bid);
     }
-
 }
