@@ -33,10 +33,6 @@ spring:
       pool-prepared-statements: false
       max-pool-prepared-statement-per-connection-size: 20
 
-mybatis:
-  mapper-locations: classpath:mybatis.mapper/*.xml
-  type-aliases-package: com.winterchen.model
-
 #pagehelper
 pagehelper:
   helperDialect: mysql
