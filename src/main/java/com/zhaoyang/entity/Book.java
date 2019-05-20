@@ -38,12 +38,12 @@ public class Book {
     public void  setWriter(String writer) {this.writer = writer;}
 
     @Basic
-    @Column(name = "price" , nullable = true , precision = 0)
+    @Column(name = "price" , nullable = true)
     public Double getPrice() {return price;}
     public void  setPrice(Double price) {this.price = price;}
 
     @Basic
-    @Column(name = "inventory" , nullable = true , precision = 0)
+    @Column(name = "inventory" , nullable = true )
     public int getInventory() {return inventory;}
     public void  setInventory(int inventory) {this.inventory = inventory;}
 
