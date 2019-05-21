@@ -4,9 +4,11 @@ import com.zhaoyang.dao.UserDAO;
 import com.zhaoyang.entity.User;
 import com.zhaoyang.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public class UserDAOImpl implements UserDAO {
     @Autowired
     private UserRepository userRepository;
