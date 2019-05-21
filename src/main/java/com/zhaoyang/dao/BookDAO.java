@@ -1,7 +1,6 @@
 package com.zhaoyang.dao;
 
 import com.zhaoyang.entity.Book;
-
 import java.util.List;
 
 public interface BookDAO {

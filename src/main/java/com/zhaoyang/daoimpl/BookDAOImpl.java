@@ -1,8 +1,7 @@
 package com.zhaoyang.daoimpl;
 
-
-import com.zhaoyang.dao.BookDAO;
 import com.zhaoyang.entity.Book;
+import com.zhaoyang.dao.BookDAO;
 import com.zhaoyang.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -25,7 +24,7 @@ public class BookDAOImpl implements BookDAO {
         oldBook.setTitle(newBook.getTitle());
         oldBook.setBid(newBook.getBid());
         oldBook.setImage(newBook.getImage());
-        oldBook.setISBN(newBook.getISBN());
+        oldBook.setIsbn(newBook.getIsbn());
         oldBook.setWriter(newBook.getWriter());
         oldBook.setInventory(newBook.getInventory());
         oldBook.setTranch(newBook.getTranch());

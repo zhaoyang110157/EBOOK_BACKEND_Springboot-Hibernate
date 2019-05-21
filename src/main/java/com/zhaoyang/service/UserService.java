@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface UserService {
 
-    User signIn( String account ,String password);
+    User signIn(String account , String password);
 
     int signUp(User user);
 
