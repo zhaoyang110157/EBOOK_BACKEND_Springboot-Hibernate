@@ -2,6 +2,7 @@ package com.zhaoyang.entity;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Entity
 @Table(name = "orders", schema = "ebook", catalog = "")
@@ -10,6 +11,9 @@ public class Orders {
     private int id;
     private int oid;
     private Timestamp time;
+    @OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
+    @JoinTable(name = "orderitem",joinColumns = {@JoinColumn(name = "oid")},inverseJoinColumns = {@JoinColumn(name = "oid")})
+    private List<Orderitem> orderitems;
 
     @Id
     @Column(name = "id")
@@ -22,6 +26,7 @@ public class Orders {
     }
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "oid")
     public int getOid() {
         return oid;

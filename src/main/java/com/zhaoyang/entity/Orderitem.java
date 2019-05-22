@@ -10,9 +10,7 @@ public class Orderitem {
     private int bid;
     private Integer sales;
     private Double price;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "oid")
-    private Orders orders;
+
     @Id
     @Column(name = "oid")
     public int getOid() {
