@@ -4,9 +4,11 @@ import com.zhaoyang.dao.OrderDAO;
 import com.zhaoyang.entity.Orders;
 import com.zhaoyang.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderDAO orderDAO;
@@ -19,4 +21,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<Orders> getAllById(int id){ return orderDAO.getAllById(id);}
+
+    @Override
+    public long getOid(){return orderDAO.getOid();}
 }

@@ -16,7 +16,10 @@ public class Orders {
     private List<Orderitem> orderitems;
     public List<Orderitem> getOrderitems(){ return orderitems;}
     public void setOrderitems(List<Orderitem> orderitems){this.orderitems = orderitems;}
-
+    public void setItemOid(int oid){
+        for(int i=0;i<orderitems.size();i++)
+            orderitems.get(i).setOid(oid);
+    }
     @Id
     @Column(name = "id")
     public int getId() {

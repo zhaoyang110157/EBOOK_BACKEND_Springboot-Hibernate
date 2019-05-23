@@ -76,4 +76,5 @@ public class UserDAOImpl implements UserDAO {
     public List<User> getAll(){
         return userRepository.findAll();
     }
+
 }

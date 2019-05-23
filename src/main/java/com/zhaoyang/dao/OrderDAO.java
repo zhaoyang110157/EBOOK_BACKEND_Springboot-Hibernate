@@ -10,4 +10,6 @@ public interface OrderDAO {
     Orders getOne(int oid);
 
     List<Orders> getAllById(int id);
+
+    long getOid();
 }

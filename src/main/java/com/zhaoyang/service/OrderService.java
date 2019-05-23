@@ -10,4 +10,5 @@ public interface OrderService {
     List<Orders> getAllById(int id);
 
     Orders getOne(int oid);
+    long getOid();
 }

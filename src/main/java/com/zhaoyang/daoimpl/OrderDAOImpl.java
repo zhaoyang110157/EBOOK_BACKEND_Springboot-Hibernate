@@ -22,4 +22,6 @@ public class OrderDAOImpl implements OrderDAO {
     @Override
     public List<Orders> getAllById(int id){ return orderRepository.findOrdersById(id);}
 
+    @Override
+    public long getOid(){return orderRepository.count();}
 }
