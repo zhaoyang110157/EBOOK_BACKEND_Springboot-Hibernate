@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface OrderRepository extends JpaRepository<Orders,Integer> {
     List<Orders> findOrdersById(int id);
-    List<Orders> findOrdersByTime(Timestamp timestamp);
+    Orders findOrdersByOid(int oid);
 }

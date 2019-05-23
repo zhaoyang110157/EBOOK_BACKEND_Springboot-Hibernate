@@ -14,6 +14,8 @@ public class Orders {
     @OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
     @JoinTable(name = "orderitem",joinColumns = {@JoinColumn(name = "oid")},inverseJoinColumns = {@JoinColumn(name = "oid")})
     private List<Orderitem> orderitems;
+    public List<Orderitem> getOrderitems(){ return orderitems;}
+    public void setOrderitems(List<Orderitem> orderitems){this.orderitems = orderitems;}
 
     @Id
     @Column(name = "id")
