@@ -1,11 +1,15 @@
 package com.zhaoyang.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 public class OrderitemPK implements Serializable {
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn(name = "oid")
     private int oid;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "bid")
     private int bid;
 
     public OrderitemPK(int oid,int bid){

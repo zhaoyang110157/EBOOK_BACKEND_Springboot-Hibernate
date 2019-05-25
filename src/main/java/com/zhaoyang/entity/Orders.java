@@ -4,6 +4,7 @@ import org.jetbrains.annotations.Contract;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Entity
@@ -14,8 +15,22 @@ public class Orders {
     private Timestamp time;
     private List<Orderitem> orderitems ;
 
-    @OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY,targetEntity=com.zhaoyang.entity.Orderitem.class)
-    @JoinTable(name = "orderitem",joinColumns = {@JoinColumn(name = "oid")},inverseJoinColumns = {@JoinColumn(name = "oid")})
+    @Contract(pure = true)
+    public Orders(Integer user_id, Integer oid, Timestamp date, List<Orderitem> orderItemList)
+    {
+        this.id=user_id;
+        this.oid=oid;
+        this.time = date;
+        this.orderitems=orderItemList;
+        return;
+    }
+    @Contract(pure = true)
+    public Orders(){}
+
+    //@OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY,targetEntity=com.zhaoyang.entity.Orderitem.class)
+    //@JoinTable(name = "orderitem",joinColumns = {@JoinColumn(name = "oid")},inverseJoinColumns = {@JoinColumn(name = "PK.oid")})
+
+    @OneToMany(mappedBy = "oid",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     public List<Orderitem> getOrderitems(){ return orderitems;}
     public void setOrderitems(List<Orderitem> orderitems){this.orderitems = orderitems;}
     public void setItemOid(int oid){
