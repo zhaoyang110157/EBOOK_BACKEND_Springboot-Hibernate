@@ -4,7 +4,6 @@ import org.jetbrains.annotations.Contract;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Entity
@@ -22,10 +21,12 @@ public class Orders {
         this.oid=oid;
         this.time = date;
         this.orderitems=orderItemList;
-        return;
     }
     @Contract(pure = true)
-    public Orders(){}
+    public Orders(){
+        oid = 0;
+        orderitems = null;
+    }
 
     //@OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY,targetEntity=com.zhaoyang.entity.Orderitem.class)
     //@JoinTable(name = "orderitem",joinColumns = {@JoinColumn(name = "oid")},inverseJoinColumns = {@JoinColumn(name = "PK.oid")})
@@ -48,7 +49,6 @@ public class Orders {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "oid")
     public int getOid() {
         return oid;
