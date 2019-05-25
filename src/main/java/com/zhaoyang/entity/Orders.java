@@ -1,26 +1,28 @@
 package com.zhaoyang.entity;
 
+import org.jetbrains.annotations.Contract;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
 
 @Entity
 @Table(name = "orders", schema = "ebook", catalog = "")
-@IdClass(OrdersPK.class)
 public class Orders {
     private int id;
     private int oid;
     private Timestamp time;
-    @OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
+    private List<Orderitem> orderitems ;
+
+    @OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY,targetEntity=com.zhaoyang.entity.Orderitem.class)
     @JoinTable(name = "orderitem",joinColumns = {@JoinColumn(name = "oid")},inverseJoinColumns = {@JoinColumn(name = "oid")})
-    private List<Orderitem> orderitems;
     public List<Orderitem> getOrderitems(){ return orderitems;}
     public void setOrderitems(List<Orderitem> orderitems){this.orderitems = orderitems;}
     public void setItemOid(int oid){
         for(int i=0;i<orderitems.size();i++)
             orderitems.get(i).setOid(oid);
     }
-    @Id
+    @Basic
     @Column(name = "id")
     public int getId() {
         return id;
@@ -51,6 +53,7 @@ public class Orders {
         this.time = time;
     }
 
+    @Contract(value = "null -> false", pure = true)
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

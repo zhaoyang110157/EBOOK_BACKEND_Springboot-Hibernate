@@ -6,29 +6,35 @@ import javax.persistence.*;
 @Table(name = "orderitem", schema = "ebook", catalog = "")
 @IdClass(OrderitemPK.class)
 public class Orderitem {
-    private int oid;
-    private int bid;
+    @EmbeddedId
+    private OrderitemPK PK= new OrderitemPK();
     private Integer sales;
     private Double price;
 
+    public Orderitem(int oid, int bid, int sales,double price){
+        this.PK = new OrderitemPK(oid,bid);
+        this.sales = sales;
+        this.price = price;
+    }
+    public Orderitem(){}
     @Id
     @Column(name = "oid")
     public int getOid() {
-        return oid;
+        return PK.getOid();
     }
 
     public void setOid(int oid) {
-        this.oid = oid;
+        this.PK.setOid(oid);
     }
 
     @Id
     @Column(name = "bid")
     public int getBid() {
-        return bid;
+        return this.PK.getBid();
     }
 
     public void setBid(int bid) {
-        this.bid = bid;
+        this.PK.setBid(bid);
     }
 
     @Basic
@@ -58,8 +64,7 @@ public class Orderitem {
 
         Orderitem that = (Orderitem) o;
 
-        if (oid != that.oid) return false;
-        if (bid != that.bid) return false;
+        if (PK != that.PK) return false;
         if (sales != null ? !sales.equals(that.sales) : that.sales != null) return false;
         if (price != null ? !price.equals(that.price) : that.price != null) return false;
 
@@ -68,8 +73,8 @@ public class Orderitem {
 
     @Override
     public int hashCode() {
-        int result = oid;
-        result = 31 * result + bid;
+        int result = this.PK.getOid();
+        result = 31 * result + this.PK.getBid();
         result = 31 * result + (sales != null ? sales.hashCode() : 0);
         result = 31 * result + (price != null ? price.hashCode() : 0);
         return result;

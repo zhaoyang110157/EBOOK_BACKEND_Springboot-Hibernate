@@ -8,6 +8,11 @@ public class OrderitemPK implements Serializable {
     private int oid;
     private int bid;
 
+    public OrderitemPK(int oid,int bid){
+        this.bid=bid;
+        this.oid=oid;
+    }
+    public OrderitemPK(){}
     @Column(name = "oid")
     @Id
     public int getOid() {
