@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:8080")
 @RequestMapping("/Book")
 @RestController
 public class BookController {
@@ -25,7 +26,7 @@ public class BookController {
     }
 
     @PostMapping("/getOne")
-    public Book getOne(@RequestParam(value="bid") int bid){
+    public Book getOne(@RequestBody int bid){
         System.out.print("Get a Book: " + bid +"\n");
         return bookService.getOne(bid);
     }
@@ -37,7 +38,7 @@ public class BookController {
     }
 
     @PostMapping("/deleteBook")
-    public void deleteBook(@RequestParam(value = "bid") int bid){
+    public void deleteBook(@RequestBody) int bid){
         System.out.print("delet a Book "+ bid + "\n");
         bookService.deleteBook(bid);
     }

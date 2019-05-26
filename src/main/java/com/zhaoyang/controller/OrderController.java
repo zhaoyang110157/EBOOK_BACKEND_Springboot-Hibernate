@@ -1,15 +1,13 @@
 package com.zhaoyang.controller;
 
-import com.zhaoyang.entity.Orderitem;
 import com.zhaoyang.entity.Orders;
 import com.zhaoyang.service.OrderService;
-import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Timestamp;
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:8080")
 @RequestMapping("/Orders")
 @RestController
 public class OrderController {
@@ -17,7 +15,7 @@ public class OrderController {
     private OrderService orderService;
 
     @RequestMapping(value = "/getAll" , method = RequestMethod.GET)
-    public List<Orders> getAll(@RequestParam int id){
+    public List<Orders> getAll(@RequestBody int id){
         return orderService.getAllById(id);
     }
 
