@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
 @CrossOrigin(origins = "http://localhost:8080")
 @RequestMapping("/Orders")
 @RestController
@@ -15,7 +14,8 @@ public class OrderController {
     private OrderService orderService;
 
     @RequestMapping(value = "/getAll" , method = RequestMethod.GET)
-    public List<Orders> getAll(@RequestBody int id){
+    public List<Orders> getAll(@RequestParam int id){
+        System.out.print(id+"'s orders show \n");
         return orderService.getAllById(id);
     }
 

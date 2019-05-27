@@ -11,11 +11,11 @@ import java.util.List;
 public class Orders {
     private int id;
     private int oid;
-    private Timestamp time;
+    private String time;
     private List<Orderitem> orderitems ;
 
     @Contract(pure = true)
-    public Orders(Integer user_id, Integer oid, Timestamp date, List<Orderitem> orderItemList)
+    public Orders(Integer user_id, Integer oid, String date, List<Orderitem> orderItemList)
     {
         this.id=user_id;
         this.oid=oid;
@@ -60,11 +60,11 @@ public class Orders {
 
     @Basic
     @Column(name = "time")
-    public Timestamp getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Timestamp time) {
+    public void setTime(String time) {
         this.time = time;
     }
 

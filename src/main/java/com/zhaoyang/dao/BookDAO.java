@@ -12,4 +12,6 @@ public interface BookDAO {
     List<Book> getAll();
 
     void deleteBook(int bid);
+
+    void buyBooks(int bid,int sales);
 }

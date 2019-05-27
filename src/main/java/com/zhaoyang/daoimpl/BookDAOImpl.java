@@ -48,4 +48,12 @@ public class BookDAOImpl implements BookDAO {
         Book book = bookRepository.findBookByBid(bid);
         bookRepository.delete(book);
     }
+
+    @Override
+    public void buyBooks(int bid ,int sales){
+        Book book = bookRepository.findBookByBid(bid);
+        int inventory = book.getInventory();
+        book.setInventory(inventory - sales);
+        bookRepository.saveAndFlush(book);
+    }
 }

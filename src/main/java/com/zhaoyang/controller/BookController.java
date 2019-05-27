@@ -38,7 +38,7 @@ public class BookController {
     }
 
     @PostMapping("/deleteBook")
-    public void deleteBook(@RequestBody) int bid){
+    public void deleteBook(@RequestBody int bid){
         System.out.print("delet a Book "+ bid + "\n");
         bookService.deleteBook(bid);
     }
