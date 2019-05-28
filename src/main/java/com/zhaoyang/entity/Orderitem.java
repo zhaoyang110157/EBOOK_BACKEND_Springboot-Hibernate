@@ -8,6 +8,7 @@ import javax.persistence.*;
 public class Orderitem {
     @EmbeddedId
     private OrderitemPK PK= new OrderitemPK();
+
     private Integer sales;
     private Double price;
 
@@ -17,8 +18,8 @@ public class Orderitem {
         this.price = price;
     }
     public Orderitem(){}
-    @Id
-    @Column(name = "oid")
+
+   @Transient
     public int getOid() {
         return PK.getOid();
     }
@@ -27,8 +28,7 @@ public class Orderitem {
         this.PK.setOid(oid);
     }
 
-    @Id
-    @Column(name = "bid")
+    @Transient
     public int getBid() {
         return this.PK.getBid();
     }

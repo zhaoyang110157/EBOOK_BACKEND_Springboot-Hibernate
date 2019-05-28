@@ -23,7 +23,7 @@ public class OrderController {
     public void addOrder(@RequestBody Orders orders){
         System.out.print("addOrders started\n" );
         int oid = (int)orderService.getOid()+1;
-        System.out.print("oid "+orders.getOid()+" id "+orders.getId() + "\n");
+        System.out.print("oid "+oid+" id "+orders.getId() + "\n");
         orders.setOid(oid);
         orders.setItemOid(oid);
         orderService.addOrder(orders);

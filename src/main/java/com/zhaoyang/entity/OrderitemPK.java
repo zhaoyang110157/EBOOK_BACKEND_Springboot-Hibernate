@@ -3,20 +3,13 @@ package com.zhaoyang.entity;
 import javax.persistence.*;
 import java.io.Serializable;
 
+
+@Embeddable
 public class OrderitemPK implements Serializable {
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JoinColumn(name = "oid")
     private int oid;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "bid")
     private int bid;
 
-    public OrderitemPK(int oid,int bid){
-        this.bid=bid;
-        this.oid=oid;
-    }
-    public OrderitemPK(){}
     @Column(name = "oid")
     @Id
     public int getOid() {
@@ -26,6 +19,12 @@ public class OrderitemPK implements Serializable {
     public void setOid(int oid) {
         this.oid = oid;
     }
+
+    public OrderitemPK(int oid,int bid){
+        this.bid=bid;
+        this.oid=oid;
+    }
+    public OrderitemPK(){}
 
     @Column(name = "bid")
     @Id

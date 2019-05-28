@@ -23,7 +23,8 @@ public class OrderServiceImpl implements OrderService {
         orderDAO.addOrder(orders);
         List<Orderitem> orderitems = orders.getOrderitems();
         for(int i =0 ; i < orderitems.size() ;++i){
-            bookDAO.buyBooks(orderitems.get(i).getBid(),orderitems.get(i).getSales());
+            Orderitem orderitem = orderitems.get(i);
+            bookDAO.buyBooks(orderitem.getBid(),orderitem.getSales());
         }
     }
 
