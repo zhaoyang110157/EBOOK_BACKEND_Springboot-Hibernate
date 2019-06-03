@@ -1,58 +1,61 @@
 package com.zhaoyang.entity;
 
 import javax.persistence.*;
+import com.zhaoyang.entity.Book;
+import com.zhaoyang.entity.Orders;
 import java.io.Serializable;
 
 
 @Embeddable
 public class OrderitemPK implements Serializable {
-    private int oid;
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn(name = "oid")
+    private Orders orders;
 
-    private int bid;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "bid")
+    private Book book;
 
-    @Column(name = "oid")
-    @Id
-    public int getOid() {
-        return oid;
-    }
-
-    public void setOid(int oid) {
-        this.oid = oid;
-    }
-
-    public OrderitemPK(int oid,int bid){
-        this.bid=bid;
-        this.oid=oid;
-    }
     public OrderitemPK(){}
 
-    @Column(name = "bid")
-    @Id
-    public int getBid() {
-        return bid;
+    public Orders getOrders(){
+        return orders;
     }
 
-    public void setBid(int bid) {
-        this.bid = bid;
+    public void setOrders(Orders orders){
+        this.orders = orders;
+    }
+
+    public OrderitemPK(Orders oid,Book bid){
+        this.book=bid;
+        this.orders=oid;
+    }
+
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         OrderitemPK that = (OrderitemPK) o;
-
-        if (oid != that.oid) return false;
-        if (bid != that.bid) return false;
+        if (book != that.book) return false;
+        if (orders != that.orders) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = oid;
-        result = 31 * result + bid;
+        final int prime=31;
+        int result=1;
+        result=prime*result+((orders==null)?0:orders.hashCode());
+        result=prime*result+((book==null)?0:book.hashCode());
         return result;
     }
 }

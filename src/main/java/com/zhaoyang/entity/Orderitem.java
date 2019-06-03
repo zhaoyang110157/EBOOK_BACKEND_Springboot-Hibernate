@@ -4,7 +4,6 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "orderitem", schema = "ebook", catalog = "")
-@IdClass(OrderitemPK.class)
 public class Orderitem {
     @EmbeddedId
     private OrderitemPK PK= new OrderitemPK();
@@ -12,7 +11,7 @@ public class Orderitem {
     private Integer sales;
     private Double price;
 
-    public Orderitem(int oid, int bid, int sales,double price){
+    public Orderitem(Orders orders, int bid, int sales,double price){
         this.PK = new OrderitemPK(oid,bid);
         this.sales = sales;
         this.price = price;
