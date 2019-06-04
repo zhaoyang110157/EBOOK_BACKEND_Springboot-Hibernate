@@ -1,5 +1,7 @@
 package com.zhaoyang.entity;
 
+import com.zhaoyang.entity.Orders;
+import com.zhaoyang.entity.Book;
 import javax.persistence.*;
 
 @Entity
@@ -11,29 +13,29 @@ public class Orderitem {
     private Integer sales;
     private Double price;
 
-    public Orderitem(Orders orders, int bid, int sales,double price){
-        this.PK = new OrderitemPK(oid,bid);
+    public Orderitem(Orders orders, Book bid, int sales,double price){
+        this.PK = new OrderitemPK(orders,bid);
         this.sales = sales;
         this.price = price;
     }
     public Orderitem(){}
 
    @Transient
-    public int getOid() {
-        return PK.getOid();
+    public Orders getOrders() {
+        return PK.getOrders();
     }
 
-    public void setOid(int oid) {
-        this.PK.setOid(oid);
+    public void setOrders(Orders oid) {
+        this.PK.setOrders(oid);
     }
 
     @Transient
-    public int getBid() {
-        return this.PK.getBid();
+    public Book getBook() {
+        return this.PK.getBook();
     }
 
-    public void setBid(int bid) {
-        this.PK.setBid(bid);
+    public void setBook(Book bid) {
+        this.PK.setBook(bid);
     }
 
     @Basic
@@ -70,12 +72,4 @@ public class Orderitem {
         return true;
     }
 
-    @Override
-    public int hashCode() {
-        int result = this.PK.getOid();
-        result = 31 * result + this.PK.getBid();
-        result = 31 * result + (sales != null ? sales.hashCode() : 0);
-        result = 31 * result + (price != null ? price.hashCode() : 0);
-        return result;
-    }
 }

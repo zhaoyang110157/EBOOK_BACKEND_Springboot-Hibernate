@@ -32,7 +32,7 @@
         <!-- Drop and re-create the database schema on startup -->
         <property name="hibernate.hbm2ddl.auto">update</property>
         <mapping class="com.zhaoyang.entity.Book"/>
-        <mapping class="com.zhaoyang.entity.Order"/>
+        <mapping class="com.zhaoyang.entity.Orders"/>
         <mapping class="com.zhaoyang.entity.User"/>
 
     </session-factory>
