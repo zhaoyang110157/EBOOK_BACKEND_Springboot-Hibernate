@@ -11,5 +11,7 @@ public interface OrderDAO {
 
     List<Orders> getAllById(int id);
 
+    List<Orders> getAll();
+
     long getOid();
 }
