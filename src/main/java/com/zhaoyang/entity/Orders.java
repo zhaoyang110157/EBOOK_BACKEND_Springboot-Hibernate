@@ -3,11 +3,10 @@ package com.zhaoyang.entity;
 import org.jetbrains.annotations.Contract;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 import java.util.List;
 
 @Entity
-@Table(name = "orders", schema = "ebook", catalog = "")
+@Table(name = "orders", schema = "ebook")
 public class Orders {
     private int id;
     private int oid;
@@ -34,9 +33,9 @@ public class Orders {
     @OneToMany(mappedBy = "oid",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     public List<Orderitem> getOrderitems(){ return orderitems;}
     public void setOrderitems(List<Orderitem> orderitems){this.orderitems = orderitems;}
-    public void setItemOid(int oid){
+    public void setItemOid(Orders oid){
         for(int i=0;i<orderitems.size();i++)
-            orderitems.get(i).setOid(oid);
+            orderitems.get(i).setOrders(oid);
     }
     @Basic
     @Column(name = "id")

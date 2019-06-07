@@ -25,7 +25,7 @@ public class OrderController {
         int oid = (int)orderService.getOid()+1;
         System.out.print("oid "+oid+" id "+orders.getId() + "\n");
         orders.setOid(oid);
-        orders.setItemOid(oid);
+        orders.setItemOid(orders);
         orderService.addOrder(orders);
     }
 

@@ -5,6 +5,7 @@ import com.zhaoyang.entity.Orders;
 import com.zhaoyang.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
