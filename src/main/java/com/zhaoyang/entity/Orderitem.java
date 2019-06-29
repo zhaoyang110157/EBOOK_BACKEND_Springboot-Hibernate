@@ -1,20 +1,19 @@
 package com.zhaoyang.entity;
 
-import com.zhaoyang.entity.Orders;
-import com.zhaoyang.entity.Book;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "orderitem", schema = "ebook", catalog = "")
+@Table(name = "orderitem", schema = "ebook")
 public class Orderitem {
+
     @EmbeddedId
     private OrderitemPK PK= new OrderitemPK();
 
     private Integer sales;
     private Double price;
 
-    public Orderitem(Orders orders, Book bid, int sales,double price){
-        this.PK = new OrderitemPK(orders,bid);
+    public Orderitem(Orders orders, Book book, int sales,double price){
+        this.PK = new OrderitemPK(orders,book);
         this.sales = sales;
         this.price = price;
     }
@@ -57,19 +56,4 @@ public class Orderitem {
     public void setPrice(Double price) {
         this.price = price;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Orderitem that = (Orderitem) o;
-
-        if (PK != that.PK) return false;
-        if (sales != null ? !sales.equals(that.sales) : that.sales != null) return false;
-        if (price != null ? !price.equals(that.price) : that.price != null) return false;
-
-        return true;
-    }
-
 }

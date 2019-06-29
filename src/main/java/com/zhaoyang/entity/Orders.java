@@ -1,5 +1,8 @@
 package com.zhaoyang.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.jetbrains.annotations.Contract;
 
 import javax.persistence.*;
@@ -7,37 +10,32 @@ import java.util.List;
 
 @Entity
 @Table(name = "orders", schema = "ebook")
+@JsonIgnoreProperties(value = {"handler","hibernateLazyInitializer","fieldHandler"})
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "oid"
+)
 public class Orders {
     private int id;
     private int oid;
     private String time;
     private List<Orderitem> orderitems ;
 
-    @Contract(pure = true)
+
     public Orders(Integer user_id, Integer oid, String date, List<Orderitem> orderItemList)
     {
         this.id=user_id;
         this.oid=oid;
         this.time = date;
-        this.orderitems=orderItemList;
+        this.orderitems=null;
+        return;
     }
-    @Contract(pure = true)
+
     public Orders(){
-        oid = 0;
-        orderitems = null;
     }
 
-    //@OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY,targetEntity=com.zhaoyang.entity.Orderitem.class)
-    //@JoinTable(name = "orderitem",joinColumns = {@JoinColumn(name = "oid")},inverseJoinColumns = {@JoinColumn(name = "PK.oid")})
 
-    @OneToMany(mappedBy = "PK.orders",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    public List<Orderitem> getOrderitems(){ return orderitems;}
-    public void setOrderitems(List<Orderitem> orderitems){this.orderitems = orderitems;}
-    public void setItemOid(Orders oid){
-        for(int i=0;i<orderitems.size();i++)
-            orderitems.get(i).setOrders(oid);
-    }
-    @Basic
+    @Id
     @Column(name = "id")
     public int getId() {
         return id;
@@ -47,7 +45,7 @@ public class Orders {
         this.id = id;
     }
 
-    @Id
+    @Basic
     @Column(name = "oid")
     public int getOid() {
         return oid;
@@ -57,7 +55,7 @@ public class Orders {
         this.oid = oid;
     }
 
-    @Basic
+    @Id
     @Column(name = "time")
     public String getTime() {
         return time;
@@ -65,6 +63,19 @@ public class Orders {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    //@OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY,targetEntity=com.zhaoyang.entity.Orderitem.class)
+    //@JoinTable(name = "orderitem",joinColumns = {@JoinColumn(name = "oid")},inverseJoinColumns = {@JoinColumn(name = "PK.oid")})
+
+
+    @OneToMany(mappedBy = "PK.orders",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value =  "book")
+    public List<Orderitem> getOrderitems(){ return orderitems;}
+    public void setOrderitems(List<Orderitem> orderitems){this.orderitems = orderitems;}
+    public void setItemOid(Orders oid){
+        for(int i=0;i<orderitems.size();i++)
+            orderitems.get(i).setOrders(oid);
     }
 
     @Contract(value = "null -> false", pure = true)

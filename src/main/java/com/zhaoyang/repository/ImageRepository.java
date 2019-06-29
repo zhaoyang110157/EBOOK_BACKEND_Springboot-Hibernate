@@ -7,9 +7,5 @@ import com.zhaoyang.entity.Image;
 
 import java.util.Optional;
 
-public class ImageRepository extends MongoRepository<Image , String>{
-    @Override
-    public Optional<Image> findById(String s) {
-        return Optional.empty();
-    }
+public interface ImageRepository extends MongoRepository<Image , String>{
 }

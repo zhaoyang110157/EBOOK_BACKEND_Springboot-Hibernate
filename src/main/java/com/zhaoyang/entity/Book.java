@@ -1,6 +1,9 @@
 package com.zhaoyang.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "book", schema = "ebook")
@@ -14,6 +17,7 @@ public class Book {
     private Integer inventory;
     private String tranch;
     private String introduction;
+    private List<Orderitem> orderitems;
 
     @Basic
     @Column(name = "title")
@@ -105,6 +109,18 @@ public class Book {
         this.introduction = introduction;
     }
 
+
+    @OneToMany(mappedBy = "PK.book", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = "order")
+    public List<Orderitem> getOrderItems() {
+        return orderitems;
+    }
+
+    public void setOrderItems(List<Orderitem> orderItems) {
+        this.orderitems = orderItems;
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -123,19 +139,5 @@ public class Book {
         if (introduction != null ? !introduction.equals(that.introduction) : that.introduction != null) return false;
 
         return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = title != null ? title.hashCode() : 0;
-        result = 31 * result + bid;
-        result = 31 * result + (image != null ? image.hashCode() : 0);
-        result = 31 * result + (isbn != null ? isbn.hashCode() : 0);
-        result = 31 * result + (writer != null ? writer.hashCode() : 0);
-        result = 31 * result + (price != null ? price.hashCode() : 0);
-        result = 31 * result + (inventory != null ? inventory.hashCode() : 0);
-        result = 31 * result + (tranch != null ? tranch.hashCode() : 0);
-        result = 31 * result + (introduction != null ? introduction.hashCode() : 0);
-        return result;
     }
 }

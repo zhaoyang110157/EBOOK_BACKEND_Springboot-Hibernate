@@ -34,7 +34,7 @@
         <mapping class="com.zhaoyang.entity.Book"/>
         <mapping class="com.zhaoyang.entity.Orders"/>
         <mapping class="com.zhaoyang.entity.User"/>
-
+        <mapping class="com.zhaoyang.entity.Orderitem"/>
     </session-factory>
 
 </hibernate-configuration>

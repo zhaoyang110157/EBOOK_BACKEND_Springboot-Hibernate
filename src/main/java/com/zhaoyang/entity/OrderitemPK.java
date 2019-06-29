@@ -1,8 +1,6 @@
 package com.zhaoyang.entity;
 
 import javax.persistence.*;
-import com.zhaoyang.entity.Book;
-import com.zhaoyang.entity.Orders;
 import java.io.Serializable;
 
 
@@ -18,6 +16,11 @@ public class OrderitemPK implements Serializable {
 
     public OrderitemPK(){}
 
+    public OrderitemPK(Orders oid,Book bid){
+        this.book=bid;
+        this.orders=oid;
+    }
+
     public Orders getOrders(){
         return orders;
     }
@@ -26,10 +29,6 @@ public class OrderitemPK implements Serializable {
         this.orders = orders;
     }
 
-    public OrderitemPK(Orders oid,Book bid){
-        this.book=bid;
-        this.orders=oid;
-    }
 
     public Book getBook() {
         return book;
