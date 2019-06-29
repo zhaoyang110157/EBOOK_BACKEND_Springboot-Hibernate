@@ -29,11 +29,12 @@ create table orders(
     foreign key (id) references users(id) on delete cascade
 );
 create table orderitem(
+    iid int,
 	oid int,
     bid int,
     price float,
     sales int,
-    primary key (oid,bid),
+    primary key (iid),
     foreign key (oid) references orders(oid) on delete cascade,
     foreign key (bid) references book(bid) on delete cascade
 );

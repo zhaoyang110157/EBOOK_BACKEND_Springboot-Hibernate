@@ -1,40 +1,52 @@
 package com.zhaoyang.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import org.intellij.lang.annotations.JdkConstants;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "orderitem", schema = "ebook")
 public class Orderitem {
-
-    @EmbeddedId
-    private OrderitemPK PK= new OrderitemPK();
-
+    private int iid;
+    private Orders orders;
+    private Book book;
     private Integer sales;
     private Double price;
 
-    public Orderitem(Orders orders, Book book, int sales,double price){
-        this.PK = new OrderitemPK(orders,book);
+    public Orderitem(Orders orders, Book book,int iid, int sales,double price){
+        this.orders = orders;
+        this.book = book;
+        this.iid = iid;
         this.sales = sales;
         this.price = price;
     }
     public Orderitem(){}
 
-   @Transient
+    @Id
+    @Column(name = "iid")
+    public int getIid(){return iid;}
+    public void setIid(int iid){this.iid = iid;}
+
+   @ManyToOne(fetch =  FetchType.EAGER)
+   @JoinColumn(name = "oid")
+   @JsonBackReference
     public Orders getOrders() {
-        return PK.getOrders();
+        return this.orders;
     }
-
     public void setOrders(Orders oid) {
-        this.PK.setOrders(oid);
+        this.orders = oid;
     }
 
-    @Transient
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "bid")
+    @JsonBackReference
     public Book getBook() {
-        return this.PK.getBook();
+        return this.book;
     }
 
     public void setBook(Book bid) {
-        this.PK.setBook(bid);
+        this.book = bid;
     }
 
     @Basic

@@ -29,9 +29,9 @@ insert into users values ( "dump",2,"123",0,"custom");
 insert into orders values(  1,0,20190409201800);
 insert into orders values( 1,1,20190409201800);
 
-insert into orderitem values(0,0,3,10);
-insert into orderitem values(0,1,1,5);
-insert into orderitem values(1,3,7,99);
+insert into orderitem values(0,0,0,3,10);
+insert into orderitem values(1,0,1,1,5);
+insert into orderitem values(2,1,3,7,99);
 
 
       
