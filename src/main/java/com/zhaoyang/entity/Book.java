@@ -10,14 +10,14 @@ import java.util.List;
 public class Book {
     private String title;
     private int bid;
+    private int state;
     private String image;
     private String isbn;
-    private String writer;
+    private String author;
     private Double price;
     private Integer inventory;
     private String tranch;
     private String introduction;
-    private List<Orderitem> orderitems;
 
     @Basic
     @Column(name = "title")
@@ -60,13 +60,23 @@ public class Book {
     }
 
     @Basic
-    @Column(name = "writer")
-    public String getWriter() {
-        return writer;
+    @Column(name = "state")
+    public int getState() {
+        return state;
     }
 
-    public void setWriter(String writer) {
-        this.writer = writer;
+    public void setState(int state) {
+        this.state = state;
+    }
+
+    @Basic
+    @Column(name = "author")
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String writer) {
+        this.author = writer;
     }
 
     @Basic
@@ -110,17 +120,6 @@ public class Book {
     }
 
 
-    @OneToMany(mappedBy = "PK.book", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = "order")
-    public List<Orderitem> getOrderItems() {
-        return orderitems;
-    }
-
-    public void setOrderItems(List<Orderitem> orderItems) {
-        this.orderitems = orderItems;
-    }
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -132,7 +131,7 @@ public class Book {
         if (title != null ? !title.equals(that.title) : that.title != null) return false;
         if (image != null ? !image.equals(that.image) : that.image != null) return false;
         if (isbn != null ? !isbn.equals(that.isbn) : that.isbn != null) return false;
-        if (writer != null ? !writer.equals(that.writer) : that.writer != null) return false;
+        if (author != null ? !author.equals(that.author) : that.author != null) return false;
         if (price != null ? !price.equals(that.price) : that.price != null) return false;
         if (inventory != null ? !inventory.equals(that.inventory) : that.inventory != null) return false;
         if (tranch != null ? !tranch.equals(that.tranch) : that.tranch != null) return false;

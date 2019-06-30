@@ -36,9 +36,8 @@ public class BookController {
         System.out.print("Get All Books \n");
         return bookService.getAll();
     }
-
-    @PostMapping("/deleteBook")
-    public void deleteBook(@RequestBody int bid){
+    @RequestMapping(value = "/deleteBook", method = RequestMethod.GET)
+    public void deleteBook(@RequestParam int bid){
         System.out.print("delete a Book "+ bid + "\n");
         bookService.deleteBook(bid);
     }

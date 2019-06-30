@@ -14,4 +14,5 @@ public interface OrderDAO {
     List<Orders> getAll();
 
     long getOid();
+    long getIid();
 }

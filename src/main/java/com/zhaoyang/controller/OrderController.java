@@ -1,7 +1,9 @@
 package com.zhaoyang.controller;
 
 import com.zhaoyang.entity.Orders;
+import com.zhaoyang.entity.Temp;
 import com.zhaoyang.service.OrderService;
+import org.graalvm.compiler.core.common.type.ArithmeticOpTable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,13 +22,13 @@ public class OrderController {
     }
 
     @PostMapping("addOrders")
-    public void addOrder(@RequestBody Orders orders){
+    public void addOrder(@RequestBody Temp temp){
         System.out.print("addOrders started\n" );
-        int oid = (int)orderService.getOid()+1;
-        System.out.print("oid "+oid+" id "+orders.getId() + "\n");
-        orders.setOid(oid);
-        orders.setItemOid(orders);
-        orderService.addOrder(orders);
+        int oid = (int)orderService.getOid();
+        System.out.print("oid "+oid+" id "+temp.getId() + "\n");
+
+        ;
+        orderService.addOrder(temp.getId(),temp.getTime(),temp.getBooks(),temp.getNums());
     }
 
 }

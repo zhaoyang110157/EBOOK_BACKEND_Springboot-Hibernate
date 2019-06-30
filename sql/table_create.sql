@@ -4,6 +4,7 @@ use ebook;
 create table book(
 	title varchar(50),
     bid int,
+    state int,
     image varchar(50),
 	ISBN varchar(20),
     author varchar(50),

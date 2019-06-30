@@ -1,7 +1,6 @@
 package com.zhaoyang.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import org.intellij.lang.annotations.JdkConstants;
 
 import javax.persistence.*;
 

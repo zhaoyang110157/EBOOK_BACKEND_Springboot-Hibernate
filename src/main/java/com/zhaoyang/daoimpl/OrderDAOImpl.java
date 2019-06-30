@@ -1,7 +1,9 @@
 package com.zhaoyang.daoimpl;
 
 import com.zhaoyang.dao.OrderDAO;
+import com.zhaoyang.entity.Orderitem;
 import com.zhaoyang.entity.Orders;
+import com.zhaoyang.repository.OrderItemRepository;
 import com.zhaoyang.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -14,9 +16,11 @@ public class OrderDAOImpl implements OrderDAO {
     @Autowired
     private OrderRepository orderRepository;
 
+    @Autowired
+    private OrderItemRepository orderItemRepository;
     @Override
     public void addOrder(Orders orders){
-        orderRepository.save(orders);
+        orderRepository.saveAndFlush(orders);
     }
 
     @Override
@@ -29,5 +33,16 @@ public class OrderDAOImpl implements OrderDAO {
     public List<Orders> getAll(){ return orderRepository.findAll(); }
 
     @Override
-    public long getOid(){return orderRepository.count();}
+    public long getOid(){
+        List<Orders> ordersList = orderRepository.findAll();
+        Orders orders = ordersList.get(ordersList.size()-1);
+        return orders.getOid()+1;
+    }
+
+    @Override
+    public long getIid(){
+        List<Orderitem> orderitemList = orderItemRepository.findAll();
+        Orderitem orderitem = orderitemList.get(orderitemList.size()-1);
+        return orderitem.getIid()+1;
+    }
 }

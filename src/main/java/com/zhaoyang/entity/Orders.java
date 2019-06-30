@@ -55,7 +55,7 @@ public class Orders {
         this.oid = oid;
     }
 
-    @Id
+    @Basic
     @Column(name = "time")
     public String getTime() {
         return time;
@@ -69,13 +69,17 @@ public class Orders {
     //@JoinTable(name = "orderitem",joinColumns = {@JoinColumn(name = "oid")},inverseJoinColumns = {@JoinColumn(name = "PK.oid")})
 
 
-    @OneToMany(mappedBy = "PK.orders",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "orders",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value =  "book")
     public List<Orderitem> getOrderitems(){ return orderitems;}
     public void setOrderitems(List<Orderitem> orderitems){this.orderitems = orderitems;}
-    public void setItemOid(Orders oid){
+    public void setItemIid(int iid){
         for(int i=0;i<orderitems.size();i++)
-            orderitems.get(i).setOrders(oid);
+        {
+            orderitems.get(i).setOrders(this);
+            orderitems.get(i).setIid(iid +i);
+        }
+
     }
 
     @Contract(value = "null -> false", pure = true)

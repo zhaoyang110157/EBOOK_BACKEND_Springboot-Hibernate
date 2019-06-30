@@ -25,7 +25,7 @@ public class BookDAOImpl implements BookDAO {
         oldBook.setBid(newBook.getBid());
         oldBook.setImage(newBook.getImage());
         oldBook.setIsbn(newBook.getIsbn());
-        oldBook.setWriter(newBook.getWriter());
+        oldBook.setAuthor(newBook.getAuthor());
         oldBook.setInventory(newBook.getInventory());
         oldBook.setTranch(newBook.getTranch());
         oldBook.setIntroduction(newBook.getIntroduction());
@@ -46,7 +46,8 @@ public class BookDAOImpl implements BookDAO {
     @Override
     public void deleteBook(int bid){
         Book book = bookRepository.findBookByBid(bid);
-        bookRepository.delete(book);
+        book.setState(0);
+        bookRepository.saveAndFlush(book);
     }
 
     @Override
