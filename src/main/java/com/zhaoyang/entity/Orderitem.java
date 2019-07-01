@@ -9,13 +9,13 @@ import javax.persistence.*;
 public class Orderitem {
     private int iid;
     private Orders orders;
-    private Book book;
+    private int bid;
     private Integer sales;
     private Double price;
 
-    public Orderitem(Orders orders, Book book,int iid, int sales,double price){
+    public Orderitem(Orders orders, int bid,int iid, int sales,double price){
         this.orders = orders;
-        this.book = book;
+        this.bid = bid;
         this.iid = iid;
         this.sales = sales;
         this.price = price;
@@ -27,9 +27,8 @@ public class Orderitem {
     public int getIid(){return iid;}
     public void setIid(int iid){this.iid = iid;}
 
-   @ManyToOne(fetch =  FetchType.EAGER)
+   @ManyToOne(cascade = CascadeType.ALL,fetch =  FetchType.LAZY)
    @JoinColumn(name = "oid")
-   @JsonBackReference
     public Orders getOrders() {
         return this.orders;
     }
@@ -37,15 +36,14 @@ public class Orderitem {
         this.orders = oid;
     }
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "bid")
-    @JsonBackReference
-    public Book getBook() {
-        return this.book;
+    @Basic
+    @Column(name="bid")
+    public int getBid() {
+        return this.bid;
     }
 
-    public void setBook(Book bid) {
-        this.book = bid;
+    public void setBid(int bid) {
+        this.bid = bid;
     }
 
     @Basic

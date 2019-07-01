@@ -1,5 +1,6 @@
 package com.zhaoyang.service;
 
+import com.zhaoyang.entity.Orderitem;
 import com.zhaoyang.entity.Orders;
 
 import java.util.List;
@@ -12,7 +13,7 @@ public interface OrderService {
     Orders getOne(int oid);
 
     long getOid();
-
+    List<Orderitem> getItems();
     long getIid();
 }
 

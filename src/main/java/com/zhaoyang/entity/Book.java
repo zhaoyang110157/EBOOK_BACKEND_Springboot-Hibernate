@@ -18,7 +18,7 @@ public class Book {
     private Integer inventory;
     private String tranch;
     private String introduction;
-
+    private List<Orderitem> orderitems;
     @Basic
     @Column(name = "title")
     public String getTitle() {
@@ -119,6 +119,10 @@ public class Book {
         this.introduction = introduction;
     }
 
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = "orders")
+    public List<Orderitem> getOrderitems(){ return orderitems;}
+    public void setOrderitems(List<Orderitem> orderitems){this.orderitems = orderitems;}
 
     @Override
     public boolean equals(Object o) {

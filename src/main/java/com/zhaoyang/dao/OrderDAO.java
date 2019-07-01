@@ -1,5 +1,6 @@
 package com.zhaoyang.dao;
 
+import com.zhaoyang.entity.Orderitem;
 import com.zhaoyang.entity.Orders;
 
 import java.util.List;
@@ -9,10 +10,10 @@ public interface OrderDAO {
 
     Orders getOne(int oid);
 
-    List<Orders> getAllById(int id);
 
     List<Orders> getAll();
 
     long getOid();
     long getIid();
+    List<Orderitem> getItems();
 }

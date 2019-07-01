@@ -1,6 +1,7 @@
 package com.zhaoyang.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "users", schema = "ebook", catalog = "")
@@ -10,7 +11,7 @@ public class User {
     private String password;
     private Integer allowed;
     private String role;
-
+    private List<Orders> ordersList;
     @Basic
     @Column(name = "account")
     public String getAccount() {
@@ -60,6 +61,18 @@ public class User {
     public void setRole(String role) {
         this.role = role;
     }
+
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinTable(name="orders",joinColumns = @JoinColumn(name = "id"),inverseJoinColumns = @JoinColumn(name="oid"))
+    public List<Orders> getOrderList() {
+        return ordersList;
+    }
+
+    public void setOrderList(List<Orders> orderList) {
+        this.ordersList = orderList;
+    }
+
 
     @Override
     public boolean equals(Object o) {

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -24,10 +25,10 @@ public class OrderDAOImpl implements OrderDAO {
     }
 
     @Override
-    public Orders getOne(int oid){ return orderRepository.findOrdersByOid(oid);}
-
-    @Override
-    public List<Orders> getAllById(int id){ return orderRepository.findOrdersById(id);}
+    public Orders getOne(int oid){
+        Orders tmp = orderRepository.findOrdersByOid(oid);
+        return tmp;
+    }
 
     @Override
     public List<Orders> getAll(){ return orderRepository.findAll(); }
@@ -44,5 +45,10 @@ public class OrderDAOImpl implements OrderDAO {
         List<Orderitem> orderitemList = orderItemRepository.findAll();
         Orderitem orderitem = orderitemList.get(orderitemList.size()-1);
         return orderitem.getIid()+1;
+    }
+
+    @Override
+    public List<Orderitem> getItems(){
+        return orderItemRepository.findAll();
     }
 }

@@ -2,6 +2,7 @@ package com.zhaoyang.serviceImpl;
 
 import com.zhaoyang.dao.BookDAO;
 import com.zhaoyang.dao.OrderDAO;
+import com.zhaoyang.dao.UserDAO;
 import com.zhaoyang.entity.Orderitem;
 
 import com.zhaoyang.entity.Book;
@@ -19,6 +20,8 @@ public class OrderServiceImpl implements OrderService {
     private OrderDAO orderDAO;
 
     @Autowired
+    private UserDAO userDAO;
+    @Autowired
     private BookDAO bookDAO;
 
     @Override
@@ -29,30 +32,22 @@ public class OrderServiceImpl implements OrderService {
         List<Orderitem> orderItemList=new ArrayList<>();
         Orderitem orderItem;
         bookNumList=nums;
-
         for(int i=0;i<books.size();++i)
         {
             bookList.add(bookDAO.getOne(books.get(i)));
         }
-
         int oid = (int)orderDAO.getOid();
-
         Orders orders=new Orders(id,oid,time,orderItemList);
-
         orderDAO.addOrder(orders);             //save后order主键得到更新，数据库自增
-
         orders.setOrderitems(orderItemList);
         int iid = (int)orderDAO.getIid();
         for(int i=0;i<books.size();++i)
         {
-            orderItem=new Orderitem(orders,bookDAO.getOne(books.get(i)),iid+i,bookNumList.get(i),bookDAO.getOne(books.get(i)).getPrice());
+            orderItem=new Orderitem(orders,(books.get(i)),iid+i,bookNumList.get(i),bookDAO.getOne(books.get(i)).getPrice());
             orderItemList.add(orderItem);
         }
         orders.setOrderitems(orderItemList);
-
         orderDAO.addOrder(orders);              //增加order订单项属性,save again
-
-
 
         for(int i=0;i<books.size();++i)
         {
@@ -66,11 +61,14 @@ public class OrderServiceImpl implements OrderService {
     public Orders getOne(int oid){ return orderDAO.getOne(oid);}
 
     @Override
-    public List<Orders> getAllById(int id){ return orderDAO.getAllById(id);}
+    public List<Orders> getAllById(int id){ return userDAO.getOne(id).getOrderList();}
 
     @Override
     public long getOid(){return orderDAO.getOid();}
 
     @Override
     public long getIid(){return  orderDAO.getIid();}
+
+    @Override
+    public List<Orderitem> getItems(){return orderDAO.getItems();}
 }

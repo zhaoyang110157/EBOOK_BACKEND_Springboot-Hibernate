@@ -73,14 +73,7 @@ public class Orders {
     @JsonIgnoreProperties(value =  "book")
     public List<Orderitem> getOrderitems(){ return orderitems;}
     public void setOrderitems(List<Orderitem> orderitems){this.orderitems = orderitems;}
-    public void setItemIid(int iid){
-        for(int i=0;i<orderitems.size();i++)
-        {
-            orderitems.get(i).setOrders(this);
-            orderitems.get(i).setIid(iid +i);
-        }
 
-    }
 
     @Contract(value = "null -> false", pure = true)
     @Override

@@ -1,11 +1,13 @@
 package com.zhaoyang.daoimpl;
 
 import com.zhaoyang.dao.UserDAO;
+import com.zhaoyang.entity.Orders;
 import com.zhaoyang.entity.User;
 import com.zhaoyang.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.OneToMany;
 import java.util.List;
 
 @Repository
@@ -76,5 +78,6 @@ public class UserDAOImpl implements UserDAO {
     public List<User> getAll(){
         return userRepository.findAll();
     }
+
 
 }
