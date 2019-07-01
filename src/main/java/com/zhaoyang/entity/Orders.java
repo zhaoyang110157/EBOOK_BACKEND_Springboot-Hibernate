@@ -70,7 +70,6 @@ public class Orders {
 
 
     @OneToMany(mappedBy = "orders",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value =  "book")
     public List<Orderitem> getOrderitems(){ return orderitems;}
     public void setOrderitems(List<Orderitem> orderitems){this.orderitems = orderitems;}
 
@@ -96,5 +95,10 @@ public class Orders {
         result = 31 * result + oid;
         result = 31 * result + (time != null ? time.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString(){
+        return "orders: oid = "+oid+" id = "+id;
     }
 }

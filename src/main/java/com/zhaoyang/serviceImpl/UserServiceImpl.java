@@ -30,7 +30,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int signUp(User user){
-        return userDAO.signUp(user);
+        int res =  userDAO.signUp(user);
+        System.out.println(res);
+        return res;
     }
 
     @Override

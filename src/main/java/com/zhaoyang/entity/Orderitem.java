@@ -24,10 +24,11 @@ public class Orderitem {
 
     @Id
     @Column(name = "iid")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getIid(){return iid;}
     public void setIid(int iid){this.iid = iid;}
 
-   @ManyToOne(cascade = CascadeType.ALL,fetch =  FetchType.LAZY)
+   @ManyToOne(targetEntity =  Orders.class,cascade = CascadeType.ALL,fetch =  FetchType.LAZY)
    @JoinColumn(name = "oid")
     public Orders getOrders() {
         return this.orders;

@@ -26,8 +26,9 @@ insert into users values ( "zhao",0,"123",1,"manager");
 insert into users values ( "123",1,"123",1,"custom");
 insert into users values ( "dump",2,"123",0,"custom");
 
-insert into orders values(  1,0,20190409201800);
-insert into orders values( 1,1,20190409201800);
+insert into orders(id,oid,time) values(  1,0,20190409201800);
+insert into orders(id,oid,time) values( 1,1,20190409201800);
+insert into orders(id,oid,time) values( 1,1,20190409201800);
 
 insert into orderitem values(0,0,0,3,10);
 insert into orderitem values(1,0,1,1,5);

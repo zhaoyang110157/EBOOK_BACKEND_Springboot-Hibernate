@@ -32,8 +32,6 @@ public class OrderController {
     @PostMapping("addOrders")
     public void addOrder(@RequestBody Temp temp){
         System.out.print("addOrders started\n" );
-        int oid = (int)orderService.getOid();
-        System.out.print("oid "+oid+" id "+temp.getId() + "\n");
         orderService.addOrder(temp.getId(),temp.getTime(),temp.getBooks(),temp.getNums());
     }
 

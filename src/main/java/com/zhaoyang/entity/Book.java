@@ -118,12 +118,7 @@ public class Book {
     public void setIntroduction(String introduction) {
         this.introduction = introduction;
     }
-
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = "orders")
-    public List<Orderitem> getOrderitems(){ return orderitems;}
-    public void setOrderitems(List<Orderitem> orderitems){this.orderitems = orderitems;}
-
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

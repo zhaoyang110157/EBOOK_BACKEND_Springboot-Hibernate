@@ -61,7 +61,6 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public int signUp( User user){
-        user.setId((int)getId());
         List<User> users = userRepository.findUserByAccount(user.getAccount());
         if(null != users && !users.isEmpty() ){
             System.out.print(user.getAccount() +" already exist \n");
@@ -69,8 +68,8 @@ public class UserDAOImpl implements UserDAO {
         }
         else{
             userRepository.save(user);
-            System.out.print(user.getId() +" sign up success \n");
-            return user.getId();
+            System.out.print(userRepository.findUserByAccount(user.getAccount()).get(0).getId() +"   signsfg up success \n");
+            return userRepository.findUserByAccount(user.getAccount()).get(0).getId();
         }
     }
 

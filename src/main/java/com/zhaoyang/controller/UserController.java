@@ -26,8 +26,8 @@ public class UserController {
     }
 
     @PostMapping("/signUp")
-    public void signUp(@RequestBody User user){
-        userService.signUp(user);
+    public int signUp(@RequestBody User user){
+        return userService.signUp(user);
     }
 
     @RequestMapping(value = "/getAll", method = RequestMethod.GET)

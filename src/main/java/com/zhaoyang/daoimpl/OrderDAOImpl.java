@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @Repository
@@ -19,6 +20,7 @@ public class OrderDAOImpl implements OrderDAO {
 
     @Autowired
     private OrderItemRepository orderItemRepository;
+
     @Override
     public void addOrder(Orders orders){
         orderRepository.saveAndFlush(orders);
@@ -32,12 +34,27 @@ public class OrderDAOImpl implements OrderDAO {
 
     @Override
     public List<Orders> getAll(){ return orderRepository.findAll(); }
+    @Override
+    public List<Orders> getAll(int id){
+        List<Orders> tmp = orderRepository.findAll();
+        System.out.println("findAll size = " + tmp.size());
+        Iterator<Orders> iter = tmp.iterator();
+        while(iter.hasNext()){  //执行过程中会执行数据锁定，性能稍差，若在循环过程中要去掉某个元素只能调用iter.remove()方法。
+            Orders orders = iter.next();
+            System.out.println(iter.next());
+            if(orders.getId() != id)
+            {
+                iter.remove();
+            }
+        }
+        System.out.println("final size "+ tmp.size());
+        return tmp;
+    }
 
     @Override
     public long getOid(){
-        List<Orders> ordersList = orderRepository.findAll();
-        Orders orders = ordersList.get(ordersList.size()-1);
-        return orders.getOid()+1;
+        System.out.println("orderR count "+ orderRepository.count());
+        return orderRepository.count()+1;
     }
 
     @Override

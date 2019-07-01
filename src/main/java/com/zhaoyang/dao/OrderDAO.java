@@ -12,7 +12,7 @@ public interface OrderDAO {
 
 
     List<Orders> getAll();
-
+    List<Orders> getAll(int id);
     long getOid();
     long getIid();
     List<Orderitem> getItems();
