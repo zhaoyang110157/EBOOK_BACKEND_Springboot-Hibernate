@@ -13,10 +13,9 @@ public class Orderitem {
     private Integer sales;
     private Double price;
 
-    public Orderitem(Orders orders, int bid,int iid, int sales,double price){
+    public Orderitem(Orders orders, int bid, int sales,double price){
         this.orders = orders;
         this.bid = bid;
-        this.iid = iid;
         this.sales = sales;
         this.price = price;
     }

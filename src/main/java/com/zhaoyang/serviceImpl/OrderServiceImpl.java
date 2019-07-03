@@ -39,7 +39,7 @@ public class OrderServiceImpl implements OrderService {
         orders.setOrderitems(orderItemList);
         for(int i=0;i<books.size();++i)
         {
-            orderItem=new Orderitem(orders,(books.get(i)),0,bookNumList.get(i),bookDAO.getOne(books.get(i)).getPrice());
+            orderItem=new Orderitem(orders,(books.get(i)),bookNumList.get(i),bookDAO.getOne(books.get(i)).getPrice());
             orderItemList.add(orderItem);
         }
         orders.setOrderitems(orderItemList);
@@ -57,7 +57,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<Orders> getAllById(int id){
-        List<Orders> tmp = userDAO.getOne(id).getOrderList();
+        List<Orders> tmp = orderDAO.getAll();
         System.out.println("findAll size = " + tmp.size());
         Iterator<Orders> iter = tmp.iterator();
         while(iter.hasNext()){  //执行过程中会执行数据锁定，性能稍差，若在循环过程中要去掉某个元素只能调用iter.remove()方法。
